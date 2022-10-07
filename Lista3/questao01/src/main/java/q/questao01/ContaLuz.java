@@ -11,16 +11,26 @@ public class ContaLuz {
     private double valorDaConta;
     private int dataVencimento;
     private boolean pagoNoPrazo;
+    private boolean foiPaga;
 
-    public ContaLuz(String contaCodigo, int dataLeitura, int kwGasto, double valorDaConta, int dataVencimento, boolean pagoNoPrazo) {
-        this.setContaCodigo(contaCodigo);
-        this.setDataLeitura(dataLeitura);
-        this.setKwGasto(kwGasto);
-        this.setValorDaConta(valorDaConta);
-        this.setDataVencimento(dataVencimento);
-        this.setPagoNoPrazo(pagoNoPrazo);
+    public ContaLuz(String contaCodigo, int dataLeitura, int kwGasto, double valorDaConta, int dataVencimento, boolean pagoNoPrazo, boolean foiPaga) {
+        this.contaCodigo = contaCodigo;
+        this.dataLeitura = dataLeitura;
+        this.kwGasto = kwGasto;
+        this.valorDaConta = valorDaConta;
+        this.dataVencimento = dataVencimento;
+        this.pagoNoPrazo = pagoNoPrazo;
+        this.foiPaga = foiPaga;
+    }
+    
+    public boolean isFoiPaga() {
+        return foiPaga;
     }
 
+    public void setFoiPaga(boolean foiPaga) {
+        this.foiPaga = foiPaga;
+    }
+    
     public boolean isPagoNoPrazo() {
         return pagoNoPrazo;
     }
@@ -71,12 +81,14 @@ public class ContaLuz {
     
     @Override
         public String toString(){
+            String p =  this.isFoiPaga() ? "\nFoi pago dentro do prazo: " + this.isPagoNoPrazo() :"" ;  
         return "Data de Leitura: " + this.getDataLeitura() +
                 "\nData de vencimento: " + this.getDataVencimento() +
                 "\nCodigo da Conta: " + this.getContaCodigo() +
                 "\nKw Gasto: " + this.getKwGasto() +
                 "\nValor da conta: R$ " + this.getValorDaConta() +
-                "\nFoi pago dentro do prazo: " + this.isPagoNoPrazo();
+                "\nFoi pago? " + this.isFoiPaga() +
+                p ;
         }
 }
 
