@@ -11,15 +11,15 @@ public class Questao01 {
 
     public static void main(String[] args) {
 
-        ArrayList<ContaLuz> lista = new ArrayList<ContaLuz>();
+        ArrayList<ContaLuz> lista = new ArrayList<>();
 
-        int controle = 1, x = 0;
+        int controle = 1;
         double soma = 0;
         Scanner ler = new Scanner(System.in);
+        int maiorConta = 0 , menorConta = 0, maiorContaId = 0, menorContaId = 0;
 
         while (controle == 1) {
-            x++;
-            System.out.println("Conta " + x);
+            System.out.println("Conta " + (lista.size()+1));
             System.out.println("Digite o codigo da sua conta: ");
             String contaCodigo = ler.next();
             
@@ -32,6 +32,8 @@ public class Questao01 {
             System.out.println("Digite o valor da conta");
             double valorDaConta = ler.nextDouble();
             soma += valorDaConta;
+            
+            maiorContaId = (maiorConta < valorDaConta) ? lista.size() : maiorContaId;
             
             System.out.println("Digite a data de vencimento apenas numeros (ddMMyyyy)");
             int dataVencimento = ler.nextInt();
@@ -51,10 +53,16 @@ public class Questao01 {
             lista.add(conta);
 
             System.out.println(conta);
+            
+//            System.out.println("==================================");
+//            
+//            System.out.println("Conta mais cara: Conta " + (maiorContaId+1) + "\n\n" + lista.get(maiorContaId));
+//            
+//            System.out.println("==================================");
 
-            System.out.println("Media de gasto: R$ " + soma / x);
+            System.out.println("Media de gasto: R$ " + soma / (lista.size()));
 
-            System.out.println("Adicionar mais contas? 1 ou 0");
+            System.out.println("Adicionar mais contas? 1  para sim ou 0 para não");
             controle = ler.nextInt();
         }
     }
