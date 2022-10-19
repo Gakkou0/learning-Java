@@ -1,32 +1,33 @@
 package q.app;
 
-import java.util.GregorianCalendar;
+//import java.text.SimpleDateFormat;
+//import java.util.Date;
+import java.time.LocalDate;
+import java.util.Calendar;
 
 /**
  *
  * @author fhugo
  */
-public final class Funcionario {
+public class Funcionario {
 
     private String cpf;
     private String nome;
     private char sexo;
     private double salarioBruto;
-    private GregorianCalendar dataNascimento;
-    private GregorianCalendar dataAdmicao;
+    private LocalDate dataNascimento;
+    private LocalDate dataAdmicao;
+    //private Date dataParaManipular;
+    //SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
-    public Funcionario(String cpf, String nome, char sexo, double salarioBruto, int ano, int mes, int dia) {
+    public Funcionario(String cpf, String nome, char sexo, double salarioBruto) {
         this.cpf = cpf;
         this.nome = nome;
         this.sexo = sexo;
         this.salarioBruto = salarioBruto;
-        setDataAdmicao(ano, mes, dia);
     }
-    
-    public void setDataAdmicao(){
-    }
-    
-    public boolean validateCpf(String cpf){
+
+    public boolean validateCpf(String cpf) {
         return cpf.length() == 14;
     }
 
@@ -62,8 +63,12 @@ public final class Funcionario {
         this.salarioBruto = salarioBruto;
     }
 
-    public void setDataAdmicao(int dia, int mes, int ano) {
-        dataNascimento = new GregorianCalendar(ano, mes, dia);
+    public void setDataAdmicao(LocalDate data) {
+        this.dataAdmicao = data;
+    }
+
+    public LocalDate getDataAdmicao() {
+        return dataAdmicao;
     }
 
     @Override
