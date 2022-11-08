@@ -3,7 +3,8 @@ package q.app;
 //import java.text.SimpleDateFormat;
 //import java.util.Date;
 import java.time.LocalDate;
-import java.util.Calendar;
+import java.time.Period;
+import java.util.Objects;
 
 /**
  *
@@ -26,10 +27,79 @@ public class Funcionario {
         this.sexo = sexo;
         this.salarioBruto = salarioBruto;
     }
+    
+    public Funcionario(){
+        this.dataAdmicao = LocalDate.now();
+    }
+
+    public Funcionario(String cpf, String nome, char sexo, double salarioBruto, LocalDate dataNascimento, LocalDate dataAdmicao) {
+        this.cpf = cpf;
+        this.nome = nome;
+        this.sexo = sexo;
+        this.salarioBruto = salarioBruto;
+        this.dataNascimento = dataNascimento;
+        this.dataAdmicao = dataAdmicao;
+    }
 
     public boolean validateCpf(String cpf) {
         return cpf.length() == 14;
     }
+    
+    public boolean validateNascimento(LocalDate nascimento){
+        LocalDate DataValida = LocalDate.of(1921, 1, 1);
+        return nascimento.isAfter(DataValida) ;
+    }
+    
+    public boolean validateAdmicao(LocalDate admicao){
+        LocalDate DataValida = LocalDate.of(1995, 1, 1);
+        return admicao.isAfter(DataValida) ;
+    }
+    
+    public int convertIdade(LocalDate nascimento){
+        LocalDate agora = LocalDate.now();
+        Period idade = Period.between(nascimento, agora);
+        
+        return idade.getYears();
+    }
+    
+    public double salarioLiquido(double salarioBruto){
+        
+        double salarioLiquido;
+        if (salarioBruto <= 3000){
+            salarioLiquido =  salarioBruto - (0.17 * salarioBruto); 
+        } else {
+            salarioLiquido =  salarioBruto - (0.27 * salarioBruto); 
+        }
+        return salarioLiquido;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Funcionario other = (Funcionario) obj;
+        if (this.sexo != other.sexo) {
+            return false;
+        }
+        if (!Objects.equals(this.cpf, other.cpf)) {
+            return false;
+        }
+        return Objects.equals(this.nome, other.nome);
+    }
+    
 
     public String getCpf() {
         return cpf;
@@ -70,9 +140,22 @@ public class Funcionario {
     public LocalDate getDataAdmicao() {
         return dataAdmicao;
     }
+    
+    public void setDataNascimento(LocalDate nascimento){
+        this.dataNascimento = nascimento;
+    }
+    
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
 
     @Override
     public String toString() {
-        return "";
+        return "Nome: " + getNome() +
+                "\nCpf: " + getCpf() +
+                "\nSexo: " + getSexo() +
+                "\nData de nascimento: " + getDataNascimento() +
+                "\nSalario Bruto " + getSalarioBruto() +
+                "\ndata de Admição: " + getDataAdmicao();
     }
 }
