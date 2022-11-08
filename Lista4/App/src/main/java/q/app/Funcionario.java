@@ -41,34 +41,34 @@ public class Funcionario {
         this.dataAdmicao = dataAdmicao;
     }
 
-    public boolean validateCpf(String cpf) {
-        return cpf.length() == 14;
+    public boolean validateCpf() {
+        return this.cpf.length() == 14;
     }
     
-    public boolean validateNascimento(LocalDate nascimento){
+    public boolean validateNascimento(){
         LocalDate DataValida = LocalDate.of(1921, 1, 1);
-        return nascimento.isAfter(DataValida) ;
+        return this.dataNascimento.isAfter(DataValida) ;
     }
     
-    public boolean validateAdmicao(LocalDate admicao){
+    public boolean validateAdmicao(){
         LocalDate DataValida = LocalDate.of(1995, 1, 1);
-        return admicao.isAfter(DataValida) ;
+        return this.dataAdmicao.isAfter(DataValida) ;
     }
     
-    public int convertIdade(LocalDate nascimento){
+    public int convertIdade(){
         LocalDate agora = LocalDate.now();
-        Period idade = Period.between(nascimento, agora);
+        Period idade = Period.between(this.dataNascimento, agora);
         
         return idade.getYears();
     }
     
-    public double salarioLiquido(double salarioBruto){
+    public double salarioLiquido(){
         
         double salarioLiquido;
-        if (salarioBruto <= 3000){
-            salarioLiquido =  salarioBruto - (0.17 * salarioBruto); 
+        if (this.salarioBruto <= 3000){
+            salarioLiquido =  this.salarioBruto - (0.17 * this.salarioBruto); 
         } else {
-            salarioLiquido =  salarioBruto - (0.27 * salarioBruto); 
+            salarioLiquido =  this.salarioBruto - (0.27 * this.salarioBruto); 
         }
         return salarioLiquido;
     }
