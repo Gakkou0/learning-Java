@@ -75,6 +75,10 @@ public class Funcionario {
         }
     }
     
+    public boolean eMaisVelho(Funcionario funcionario) {
+		return getDataNascimento().before(funcionario.getDataNascimento());
+	}
+    
     public double salarioLiquido(){
         
         double salarioLiquido;
