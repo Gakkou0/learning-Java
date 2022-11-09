@@ -62,6 +62,19 @@ public class Funcionario {
         return idade.getYears();
     }
     
+    public double getBonificacao(){
+        double salarioAnual = this.salarioBruto * 12;
+        return 0.02 * salarioAnual;
+    }
+    
+    public LocalDate dataAposentadoria(){
+        if (getSexo()=='F'){
+            return this.dataAdmicao.plusYears(30);
+        } else {
+            return this.dataAdmicao.plusYears(35);
+        }
+    }
+    
     public double salarioLiquido(){
         
         double salarioLiquido;
