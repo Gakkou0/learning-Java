@@ -46,4 +46,10 @@ public class PessoaJuridica extends Pessoa{
         return idade.getYears();
     }
     
+    @Override
+    public String toString(){
+        return "Nome: " + getNome() +
+                "\ncnpj: " +getCnpj()+
+                "\nData de abertura: "+ getDataCriacao();
+    }
 }

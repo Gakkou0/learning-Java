@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package q.lista6;
 
 /**
@@ -9,49 +5,91 @@ package q.lista6;
  * @author fhugo
  */
 public class ColecaoPessoa implements Colecao {
-    
-    Pessoa[] dados;
-    
-    
 
-    @Override
-    public boolean inserir(Pessoa p) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    private Pessoa[] dados;
+    private int posicaoCorrente;
+
+    public ColecaoPessoa(Pessoa[] dados) {
+        this.dados = dados;
+    }
+
+    public ColecaoPessoa(Pessoa[] dados, int posicaoCorrente) {
+        this.dados = dados;
+        this.posicaoCorrente = posicaoCorrente;
     }
 
     @Override
-    public boolean remover() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean inserir(Pessoa p) {
+        try {
+            Pessoa[] pessoa = new Pessoa[dados.length + 1];
+            System.arraycopy(dados, 0, pessoa, 0, dados.length);
+            pessoa[dados.length] = p;
+            dados = pessoa;
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
     }
 
     @Override
     public boolean remover(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            Pessoa[] pessoa = new Pessoa[dados.length - 1];
+            for (int i = 0, k = 0; i < dados.length; i++) {
+                if (i != this.posicaoCorrente) {
+                    pessoa[k] = dados[i];
+                    k++;
+                }
+            }
+            dados = pessoa;
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
     }
 
     @Override
     public void atualizar(int index, Pessoa p) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            this.dados[index] = p;
+            System.out.println("Update completo\n" + p);
+        } catch (Exception ex) {
+            System.out.println("Erro no update");
+        }
     }
 
     @Override
     public boolean pesquisar(Pessoa p) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        boolean found = false;
+        for (Pessoa x : this.dados) {
+            if (x == p) {
+                found = true;
+                break;
+            }
+        }
+        return found;
     }
 
     @Override
     public boolean colecaoEstaVazia() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return this.dados.length == 0;
     }
 
     @Override
     public void imprimirDadosColecao() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        for (Pessoa pessoa : this.dados) {
+            System.out.println(pessoa + "\n");
+        }
+    }
+
+    @Override
+    public boolean remover() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public Pessoa retornarObj(int index) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return this.dados[index];
     }
-    
+
 }

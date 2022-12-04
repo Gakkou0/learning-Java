@@ -8,12 +8,12 @@ import java.util.Objects;
  *
  * @author fhugo
  */
-public class PessosFisica extends Pessoa{
+public class PessoaFisica extends Pessoa{
     
     private String cpf;
     private LocalDate dataNascimento;
 
-    public PessosFisica(String cpf, LocalDate dataNascimento, String nome) {
+    public PessoaFisica(String cpf, String nome, LocalDate dataNascimento) {
         super(nome);
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
@@ -52,7 +52,7 @@ public class PessosFisica extends Pessoa{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final PessosFisica other = (PessosFisica) obj;
+        final PessoaFisica other = (PessoaFisica) obj;
         return Objects.equals(this.cpf, other.cpf);
     }
 
@@ -67,4 +67,10 @@ public class PessosFisica extends Pessoa{
         return idade.getYears();
     }
     
+        @Override
+    public String toString(){
+        return "Nome: " + getNome() +
+                "\nCpf: " +getCpf()+
+                "\nData de Nascimento: "+ getDataNascimento();
+    }
 }
